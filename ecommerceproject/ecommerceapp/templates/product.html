@@ -1,0 +1,52 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+
+     {{product.description|truncatewords:155}}
+
+{% endblock %}
+{% block title %}
+ {% if category %}
+     {{ product.name}}--Cake World
+ {% endif %}
+{% endblock %}
+
+{% block content %}
+<img class="my_image my_image_padding" src="{% static 'img/bake3.png' %}" alt="our products">
+<div class="row my_product_row_class">
+    <div class="mx_auto">
+        <p> <a href="{% url 'ecommerceapp:allprodcat' %}">HOME</a> | <a href="{{product.category.get_url}}">{{product.category}}</a>|{{product.name}}</a> </p>
+    </div>
+</div>
+<div class="container">
+<br>
+
+
+
+
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+        <div style="min-width:18rem;">
+            <img src="{{product.image.url}}" alt="{{product.name}}" width="320px;" height="320px;">
+        </div>
+    </div>
+
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+            <div>
+            <h1 class="my_product_title ">{{product.name}}</h1>
+            <p>${{product.price}}</p>
+            <p class="text-justify my_prod_text ">{{product.description}}</p>
+            {% if product.stock <= 0 %}
+            <p class="text-justify my_prod_text" style="color:red;"><b>Out of Stock</b></p>
+            {% else %}
+            <a class="btn btn-secondary" href="{% url 'cart:add_cart' product.id %}">Add to Cart</a>
+            {% endif %}
+            {% endblock %}
+
+
+        </div>
+    </div>
+</div>
+</div>
+</div>
